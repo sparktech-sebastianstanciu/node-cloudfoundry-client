@@ -90,4 +90,25 @@ describe('apps', function () {
             done();
         });
     });
+
+    it('summary returns service info', function (done) {
+        client.apps.summary(app.name, function (err, summary) {
+            assert(! err, err);
+            var services = summary.services;
+            assert.equal(services.length, 1);
+            assert.equal(services[0].name, 'test-mongodb');
+            assert.equal(services[0].service_plan.service.version, '2.2');
+            done();
+        });
+    });
+
+    it('stats return app statistics', function (done) {
+        client.apps.stats(app.name, function (err, stats) {
+            assert(! err, err);
+            assert.equal(stats[0].state, 'RUNNING');
+            assert.deepEqual(stats[0].stats.uris, ['testapp.ourhost.com']);
+            assert.equal(stats[0].stats.uptime, '12345');
+            done();
+        });
+    });
 });
