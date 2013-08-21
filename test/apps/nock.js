@@ -100,3 +100,16 @@ nock('https://ourhost.com:443')
   'cache-control': 'max-age=0, private, must-revalidate',
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
+
+nock('http://ourhost.com')
+  .get('/v2/apps/testapp/summary')
+  .reply(200, "{\"name\": \"testapp\",\"services\": [{\"guid\": \"00aeef00-0ea0-0000-00a0-b00000d0b0f0\",\"name\": \"test-mongodb\",\"bound_app_count\": 0,\"dashboard_url\": \"null\",\"service_plan\": {\"guid\": \"afbd0ff0-00f0-0000-bd00-0000000d0000\",\"name\": \"000\",\"service\": {\"guid\": \"000e00ed-0ea0-000a-b00c-bcca000000bb\",\"label\": \"mongodb\",\"provider\": \"core\",\"version\": \"2.2\"}}}],\"available_domains\": [{\"guid\": \"d00c00d0-0000-00cd-0f00-000a000b0000\",\"name\": \"testapp.ourhost.com\",\"owning_organization_guid\": \"null\"}],\"production\": \"false\",\"memory\": \"64\",\"instances\": \"1\",\"disk_quota\": \"1024\",\"state\":\"STARTED\",\"version\": \"a0c00000-000e-0e0d-b00a-0fcf000ffa00\",\"command\": \"node index.js\",\"console\": \"true\", \"debug\": \"null\", \"staging_task_id\": \"dc0e0d00de0d0000000e00000a00ec00\"}", { server: 'nginx',
+  date: 'Wed, 14 Aug 2013 21:05:10 GMT',
+  'content-type': 'application/json; charset=utf-8',
+  'transfer-encoding': 'chunked',
+  connection: 'keep-alive',
+  'keep-alive': 'timeout=20',
+  etag: '"12d345a67b8901eeda23fa456789b0e1"',
+  'cache-control': 'max-age=0, private, must-revalidate',
+  'x-ua-compatible': 'IE=Edge,chrome=1' });
+
