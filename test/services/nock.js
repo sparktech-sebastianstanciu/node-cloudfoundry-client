@@ -1,7 +1,7 @@
 var nock = require('nock');
 
-nock('https://ourhost.com:443')
-  .post('/users/me@me.com/tokens', {"password":"mypassword"})
+nock('http://ourhost.com')
+  .post('/v2/users/me@me.com/tokens', {"password":"mypassword"})
   .reply(200, "{\"token\":\"bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjEzNzcwMjQ1ODgsInVzZXJfbmFtZSI6Im1lQG1lLmNvbSIsInNjb3BlIjpbImNsb3VkX2NvbnRyb2xsZXIucmVhZCIsImNsb3VkX2NvbnRyb2xsZXIud3JpdGUiLCJvcGVuaWQiLCJwYXNzd29yZC53cml0ZSJdLCJlbWFpbCI6Im1lQG1lLmNvbSIsImF1ZCI6WyJvcGVuaWQiLCJjbG91ZF9jb250cm9sbGVyIiwicGFzc3dvcmQiXSwianRpIjoiOTljZmVhM2YtNjY5Yy00NjNjLTgwOWUtNmQ4ZDQwNjkzODAyIiwidXNlcl9pZCI6Ijg1OTY4YzA2LWZjMGEtNGNkOS04NmJiLWZjM2RjNjRkZTkwZCIsImNsaWVudF9pZCI6InZtYyJ9.ALILCvLtJBMnAL6IS0YUVwf9KSCzjitT-7KsUxzf31I\"}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:08 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -13,8 +13,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/')
+nock('http://ourhost.com')
+  .get('/v2/services')
   .reply(200, "[]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:08 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -26,8 +26,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/test')
+nock('http://ourhost.com')
+  .get('/v2/services/test')
   .reply(404, "{\"code\":500,\"description\":\"Service not found\"}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:09 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -38,8 +38,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .post('/services', {"name":"test","vendor":"mongodb","version":"2.4","tier":"free"})
+nock('http://ourhost.com')
+  .post('/v2/services', {"name":"test","vendor":"mongodb","version":"2.4","tier":"free"})
   .reply(200, "{}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:12 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -51,8 +51,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/test')
+nock('http://ourhost.com')
+  .get('/v2/services/test')
   .reply(200, "{\"name\":\"test\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:12 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -64,8 +64,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/')
+nock('http://ourhost.com')
+  .get('/v2/services')
   .reply(200, "[{\"name\":\"test\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:13 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -77,7 +77,7 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
+nock('http://ourhost.com:443')
   .delete('/services/test')
   .reply(200, "{}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:13 GMT',
@@ -90,8 +90,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .delete('/services/test')
+nock('http://ourhost.com')
+  .delete('/v2/services/test')
   .reply(404, "{\"code\":500,\"description\":\"Service not found\"}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:14 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -102,8 +102,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/')
+nock('http://ourhost.com')
+  .get('/v2/services')
   .reply(200, "[]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:14 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -115,8 +115,8 @@ nock('https://ourhost.com:443')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('https://ourhost.com:443')
-  .get('/services/test')
+nock('http://ourhost.com')
+  .get('/v2/services/test')
   .reply(404, "{\"code\":500,\"description\":\"Service not found\"}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:15 GMT',
   'content-type': 'application/json; charset=utf-8',
