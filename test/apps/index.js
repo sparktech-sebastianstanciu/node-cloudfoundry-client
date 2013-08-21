@@ -101,4 +101,14 @@ describe('apps', function () {
             done();
         });
     });
+
+    it('stats return app statistics', function (done) {
+        client.apps.stats(app.name, function (err, stats) {
+            assert(! err, err);
+            assert.equal(stats[0].state, 'RUNNING');
+            assert.deepEqual(stats[0].stats.uris, ['testapp.ourhost.com']);
+            assert.equal(stats[0].stats.uptime, '12345');
+            done();
+        });
+    });
 });
