@@ -5,6 +5,7 @@ var host     = 'ourhost.com',
     password = 'mypassword';
 
 var client = module.exports = new VcapClient({
+	protocol: 'http:',
     host:     host,
     email:    email,
     password: password
