@@ -8,6 +8,7 @@ var client = module.exports = new VcapClient({
 	protocol: 'http:',
     host:     host,
     email:    email,
+    token:    'dfdsfsdfsdfsdfsdfsdfdfs',
     password: password
 });
 
