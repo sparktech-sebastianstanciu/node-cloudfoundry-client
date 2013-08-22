@@ -39,7 +39,7 @@ nock('http://ourhost.com')
 
 
 nock('http://ourhost.com')
-  .post('/v2/services', {"name":"test","vendor":"mongodb","version":"2.4","tier":"free"})
+  .post('/v2/services', {"name":"test","label": "testl","url":"http://ddd.dd.com","vendor":"mongodb","version":"2.4","tier":"free","provider":"core","description":"desc"})
   .reply(200, "{}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:12 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -53,7 +53,7 @@ nock('http://ourhost.com')
 
 nock('http://ourhost.com')
   .get('/v2/services/test')
-  .reply(200, "{\"name\":\"test\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}", { server: 'nginx',
+  .reply(200, "{\"name\":\"test\",\"label\": \"testl\",\"url\":\"http://ddd.dd.com\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"description\":\"desc\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:12 GMT',
   'content-type': 'application/json; charset=utf-8',
   'transfer-encoding': 'chunked',
@@ -66,7 +66,7 @@ nock('http://ourhost.com')
 
 nock('http://ourhost.com')
   .get('/v2/services')
-  .reply(200, "[{\"name\":\"test\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}]", { server: 'nginx',
+  .reply(200, "[{\"name\":\"test\",\"label\": \"testl\",\"url\":\"http://ddd.dd.com\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"description\":\"desc\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:13 GMT',
   'content-type': 'application/json; charset=utf-8',
   'transfer-encoding': 'chunked',
@@ -77,8 +77,8 @@ nock('http://ourhost.com')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 
-nock('http://ourhost.com:443')
-  .delete('/services/test')
+nock('http://ourhost.com')
+  .delete('/v2/services/test')
   .reply(200, "{}", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:13 GMT',
   'content-type': 'application/json; charset=utf-8',

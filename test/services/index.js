@@ -9,10 +9,13 @@ describe('services', function () {
 
     var service_ = {
         name: 'test',
+        label: 'testl',
         type: 'document',
+        url: 'http://ddd.dd.com',
         vendor: 'mongodb',
         provider: 'core',
         version: '2.4',
+        description: 'desc',
         tier: 'free',
         properties: {},
         meta: {
@@ -57,7 +60,9 @@ describe('services', function () {
 
     it('create service succeeds', function (done) {
         client.services.create(Object.select(service_,
-            'name', 'tier', 'vendor', 'version'), function (err) {
+            'name', 'label', 'url', 'provider', 'tier',
+            'vendor', 'version', 'description'
+            ), function (err) {
             assert(! err, err);
             done();
         });
@@ -82,6 +87,7 @@ describe('services', function () {
 
     it('delete service', function (done) {
         client.services.delete(service_.name, function (err) {
+            console.log(err);
             assert(! err, err);
             done();
         });

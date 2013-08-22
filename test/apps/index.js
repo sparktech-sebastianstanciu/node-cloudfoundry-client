@@ -12,6 +12,7 @@ describe('apps', function () {
 
     var app = {
         name: appName,
+        space_guid: '12abcf34-5de6-789-01f2-b34567d8b9f0',
         staging: {
             model: 'node',
             stack: 'node0815'

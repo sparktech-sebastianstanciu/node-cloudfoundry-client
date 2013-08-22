@@ -52,7 +52,7 @@ nock('http://ourhost.com')
 
 nock('http://ourhost.com')
   .get('/v2/apps/testapp')
-  .reply(200, "{\"name\":\"testapp\",\"staging\":{\"model\":\"node\",\"stack\":\"node0815\"},\"uris\":[\"testapp.ourhost.com\"],\"instances\":1,\"runningInstances\":0,\"resources\":{\"memory\":64,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"2a7fa52e815a7cbd5cea5e223349ae38-0\",\"env\":[],\"meta\":{\"debug\":null,\"console\":null,\"version\":1,\"created\":1376514310}}", { server: 'nginx',
+  .reply(200, "{\"name\":\"testapp\",\"space_guid\": \"12abcf34-5de6-789-01f2-b34567d8b9f0\",\"staging\":{\"model\":\"node\",\"stack\":\"node0815\"},\"uris\":[\"testapp.ourhost.com\"],\"instances\":1,\"runningInstances\":0,\"resources\":{\"memory\":64,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"2a7fa52e815a7cbd5cea5e223349ae38-0\",\"env\":[],\"meta\":{\"debug\":null,\"console\":null,\"version\":1,\"created\":1376514310}}", { server: 'nginx',
   date: 'Wed, 14 Aug 2013 21:05:10 GMT',
   'content-type': 'application/json; charset=utf-8',
   'transfer-encoding': 'chunked',
