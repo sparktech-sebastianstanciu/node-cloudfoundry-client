@@ -13,7 +13,7 @@ nock('http://ourhost.com')
   'x-ua-compatible': 'IE=Edge,chrome=1' });
 
 nock('http://ourhost.com')
-  .get('/v2/apps')
+  .get('/v2/apps?page=1')
   .reply(200, "[]", { server: 'nginx',
   date: 'Wed, 14 Aug 2013 21:05:08 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -88,7 +88,7 @@ nock('http://ourhost.com')
 
 
 nock('http://ourhost.com')
-  .get('/v2/apps')
+  .get('/v2/apps?page=1')
   .reply(200, "[]", { server: 'nginx',
   date: 'Wed, 14 Aug 2013 21:05:11 GMT',
   'content-type': 'application/json; charset=utf-8',

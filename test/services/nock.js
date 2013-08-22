@@ -14,7 +14,7 @@ nock('http://ourhost.com')
 
 
 nock('http://ourhost.com')
-  .get('/v2/services')
+  .get('/v2/services?page=1')
   .reply(200, "[]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:08 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -65,7 +65,7 @@ nock('http://ourhost.com')
 
 
 nock('http://ourhost.com')
-  .get('/v2/services')
+  .get('/v2/services?page=1')
   .reply(200, "[{\"name\":\"test\",\"label\": \"testl\",\"url\":\"http://ddd.dd.com\",\"type\":\"document\",\"vendor\":\"mongodb\",\"provider\":\"core\",\"version\":\"2.4\",\"description\":\"desc\",\"tier\":\"free\",\"properties\":{},\"meta\":{\"created\":1376420049,\"updated\":1376420052,\"tags\":[\"nosql\",\"document\"],\"version\":1}}]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:13 GMT',
   'content-type': 'application/json; charset=utf-8',
@@ -103,7 +103,7 @@ nock('http://ourhost.com')
 
 
 nock('http://ourhost.com')
-  .get('/v2/services')
+  .get('/v2/services?page=1')
   .reply(200, "[]", { server: 'nginx',
   date: 'Tue, 13 Aug 2013 18:54:14 GMT',
   'content-type': 'application/json; charset=utf-8',
