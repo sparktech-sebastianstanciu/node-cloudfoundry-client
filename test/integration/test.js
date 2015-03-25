@@ -14,6 +14,12 @@ describe('integration tests', function () {
     var client,
         orgName;
 
+    assert.matchNames = function (result, name) {
+        assert.deepEqual(result.map(function (each) {
+            return each.entity.name;
+        }), [ name ]);
+    };
+
     before(function (done) {
         var configPath = require('path').resolve(__dirname, 'config.json');
         require('fs').readFile(configPath, function (err, data) {
@@ -31,11 +37,27 @@ describe('integration tests', function () {
             orgName = config.orgName;
 
             client = new Client({
-                host: config.host,
-                token: config.token
+                host:     config.host,
+                token:    config.token,
+                email:    config.email,
+                password: config.password
             });
 
             done();
+        });
+    });
+
+    after(function (done) {
+        client.orgs.get({ name: orgName }, function (err, org) {
+            if (err) {
+                return done();
+            }
+
+            if (org.isEmpty()) {
+                return done();
+            }
+
+            client.orgs.delete(org.metadata.guid, done);
         });
     });
 
@@ -64,7 +86,7 @@ describe('integration tests', function () {
         it('get by name', function (done) {
             client.orgs.getByName(orgName, function (err, org) {
                 assert.noError(err);
-                assert.equal(org.entity.name, orgName);
+                assert.matchNames(org, orgName);
                 done();
             });
         });
@@ -127,9 +149,39 @@ describe('integration tests', function () {
         });
 
         it('get by name', function (done) {
-            client.spaces.getByName(spaceName, function (err, space) {
+            client.spaces.getByName(spaceName, function (err, spaces) {
                 assert.noError(err);
-                assert.equal(space.entity.name, spaceName);
+                assert.matchNames(spaces, spaceName);
+                done();
+            });
+        });
+
+        it('get by org guid', function (done) {
+            client.spaces.get({ organization_guid: orgGuid },
+                function (err, spaces) {
+
+                assert.noError(err);
+                assert.matchNames(spaces, spaceName);
+                done();
+            });
+        });
+
+        it('get by space name and org guid', function (done) {
+            client.spaces.get({ name: spaceName, organization_guid: orgGuid },
+                function (err, spaces) {
+
+                assert.noError(err);
+                assert.matchNames(spaces, spaceName);
+                done();
+            });
+        });
+
+        it('get by space name and wrong org guid fails', function (done) {
+            client.spaces.get({ name: spaceName, organization_guid: '111' },
+                function (err, spaces) {
+
+                assert.noError(err);
+                assert.deepEqual(spaces, []);
                 done();
             });
         });
@@ -206,9 +258,9 @@ describe('integration tests', function () {
         });
 
         it('get by name', function (done) {
-            client.apps.getByName(appName, function (err, app) {
+            client.apps.getByName(appName, function (err, apps) {
                 assert.noError(err);
-                assert.equal(app.entity.name, appName);
+                assert.matchNames(apps, appName);
                 done();
             });
         });
@@ -217,6 +269,41 @@ describe('integration tests', function () {
             client.apps.get(guid, function (err, app) {
                 assert.noError(err);
                 assert.equal(app.entity.name, appName);
+                done();
+            });
+        });
+
+        it('get instances', function (done) {
+            client.apps.get(guid).instances.get(function (err, instances) {
+                assert.deepEqual(err, {
+                    message: {
+                        code: 170002,
+                        description: 'App has not finished staging'
+                    },
+                    statusCode: 400
+                });
+                done();
+            });
+        });
+
+        it('get logs', function (done) {
+            client.apps.get(guid).instances.get(0).logs.get(
+                function (err, logs) {
+
+                // TODO: can't really test logs until we actually upload and
+                // start apps, since logs will not be produced. Here we simply
+                // check for the error we expect in the context of getting logs
+                // on a stopped app
+
+                assert.deepEqual(err, {
+                    message: {
+                        code: 190001,
+                        description: 'File error: Request failed for app: ' +
+                                     'testApp path: logs as the app is in ' +
+                                     'stopped state.'
+                    },
+                    statusCode: 400
+                }); // app is stopped
                 done();
             });
         });
